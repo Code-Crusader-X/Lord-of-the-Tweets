@@ -39,7 +39,7 @@ ________________________________________________________________________________
 
 ### Herausforderungen
 
-#### 1. Erweiterte Funktionen
+#### 3. Erweiterte Funktionen
 - [ ] Tweet-Sortierung
   - Sortierung nach Datum oder Likes
   - Benötigte Parameter: "sort" beim Abrufen
