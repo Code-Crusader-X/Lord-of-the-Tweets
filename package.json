@@ -7,7 +7,7 @@
     "start": "serve"
   },
   "keywords": ["html", "css"],
-  "author": "Stefan Nafra",
+  "author": "Saurons Code Orcs",
   "license": "MIT",
   "devDependencies": {
     "serve": "11.2.0"
