@@ -163,6 +163,8 @@ $(function () {
           <span class="tweet-time">${timeAgo}</span>
         </div>
         <div class="tweet-text">${escapeHtml(tweet.text)}</div>
+        <button class="btn btn-secondary btn-translate-ork mt-1" data-text="${escapeHtml(tweet.text)}">Auf Orkisch übersetzen</button>
+        <div class="tweet-text orcish mt-1 d-none"></div>
         <div class="tweet-reactions my-2">
           <button class="btn-praise" data-vote="upvote">
             Aufheizen 🔥 (${tweet.reactions})
@@ -174,7 +176,7 @@ $(function () {
         <div class="comment-section">
           <div class="mb-1"><b>Kommentare:</b></div>
           ${commentsHtml}
-        </div>q
+        </div>
       </div>
     `;
   }
