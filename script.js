@@ -1,112 +1,112 @@
-// Page (DOM) has finished loading:
+// Die Seite (DOM) ist fertig geladen:
 $(function () {
   /* 1. API-KEY: START ----------------------------------------
-  - Purpose: Send the API key to authenticate with the Server
-      - Remark: Do not touch this
+  - Zweck: Senden des API-Schlüssels zur Authentifizierung mit dem Server
+      - Hinweis: Nicht verändern
   ------------------------------------------------------------- */
 
-  // 1.1. Send the API key with every jQuery AJAX-call:
+  // 1.1. Sende den API-Schlüssel mit jedem jQuery AJAX-Aufruf:
   $.ajaxSetup({ headers: { "X-Auth-Token": "a534e63a0d68ad8ec00d" } });
 
-  /* API-KEY: END --------------------------------------------- */
+  /* API-KEY: ENDE --------------------------------------------- */
 
-  /* 2. FETCH TWEETS: START ------------------------------------
-      - Purpose: Fetch and display all posts from the server
-  - Task: Assignment #22 - Minimal requirements: Task #3
+  /* 2. TWEETS ABRUFEN: START ------------------------------------
+      - Zweck: Alle Beiträge vom Server abrufen und anzeigen
+  - Aufgabe: Aufgabe #22 - Mindestanforderungen: Aufgabe #3
   ------------------------------------------------------------- */
 
-  // 2.1. Fetch the data from the server
-  // Hint: Within this task, you can easyly handle the task #1 of the challenge requirements by dynamically updating the filter parameter
-  // Hint: See the referencing example from our lecture: https://codesandbox.io/p/sandbox/referencing-4z7ltd/
+  // 2.1. Daten vom Server abrufen
+  // Hinweis: Innerhalb dieser Aufgabe können Sie die Aufgabe #1 der Challenge-Anforderungen leicht lösen, indem Sie den Filterparameter dynamisch aktualisieren
+  // Hinweis: Siehe das Referenzbeispiel aus unserer Vorlesung: https://codesandbox.io/p/sandbox/referencing-4z7ltd/
   var sort = localStorage.getItem('lotr_sort') || "popular";
   $('#sort-dropdown').val(sort);
   loadTweets();
 
-  // 2.2. Display the received data
-  // Hint: Iterate over the "data" object (using a loop - try the forEach) and return the posts back to the page
-  // Hint: See the templating example from our lecture: https://codesandbox.io/p/sandbox/templating-hn76s4/
+  // 2.2. Die empfangenen Daten anzeigen
+  // Hinweis: Iterieren Sie über das "data"-Objekt (mit einer Schleife - versuchen Sie forEach) und geben Sie die Beiträge zurück auf die Seite
+  // Hinweis: Siehe das Templating-Beispiel aus unserer Vorlesung: https://codesandbox.io/p/sandbox/templating-hn76s4/
 
-  // 2.3. Display the date in a different format (Challenge requirements: Task #3)
-  // Hint: You're allowed to use a plugin for this task
+  // 2.3. Das Datum in einem anderen Format anzeigen (Challenge-Anforderungen: Aufgabe #3)
+  // Hinweis: Sie dürfen ein Plugin für diese Aufgabe verwenden
 
-  // This returns all posts as an object within the console - replace it with the logic to display the data (nicely) on the page
+  // Dies gibt alle Beiträge als Objekt in der Konsole zurück - ersetzen Sie es durch die Logik, um die Daten (schön) auf der Seite anzuzeigen
   // console.log(data);
   // document.querySelector("#posts-container").textContent = data[0]["user"];
 
-  /* FETCH TWEETS: END ----------------------------------------- */
+  /* TWEETS ABRUFEN: ENDE ----------------------------------------- */
 
-  /* 3. VOTE TWEETS: START ------------------------------------
-      - Purpose: Vote on a note
-  - Task: Assignment #22 - Minimal requirements: Task #4
+  /* 3. TWEETS BEWERTEN: START ------------------------------------
+      - Zweck: Einen Beitrag bewerten
+  - Aufgabe: Aufgabe #22 - Mindestanforderungen: Aufgabe #4
   ------------------------------------------------------------ */
 
-  // 3.1. Vote button was pressed:
-  // Hint: Execute the (folowing) "vote on a note" functionality whenever a "vote"-button is pressed
+  // 3.1. Bewertungsbutton wurde gedrückt:
+  // Hinweis: Führen Sie die (folgende) "Beitrag bewerten"-Funktionalität aus, wenn ein "Bewerten"-Button gedrückt wird
 
-  // 3.2. Increase the "vote"-counter on the server
-  // Hint: You need to replace the contents of the variable "tweetID" with the ID of the note on which the button was pressed
-  // Hint: See the referencing example from our lecture: https://codesandbox.io/p/sandbox/referencing-4z7ltd/
-  // var tweetID = pressedelement.target.dataset.tweetID; // Example on how to get an ID (depending on your code)
-  var tweetID = 1; // Example on how to get an ID (depending on your code)
-  var voteType = "upvote"; // Update this to "downvote" to downvote the post
+  // 3.2. Erhöhen Sie den "Bewerten"-Zähler auf dem Server
+  // Hinweis: Sie müssen den Inhalt der Variable "tweetID" durch die ID des Beitrags ersetzen, auf den der Button gedrückt wurde
+  // Hinweis: Siehe das Referenzbeispiel aus unserer Vorlesung: https://codesandbox.io/p/sandbox/referencing-4z7ltd/
+  // var tweetID = pressedelement.target.dataset.tweetID; // Beispiel, wie man eine ID erhält (abhängig von Ihrem Code)
+  var tweetID = 1; // Beispiel, wie man eine ID erhält (abhängig von Ihrem Code)
+  var voteType = "upvote"; // Aktualisieren Sie dies zu "downvote", um den Beitrag abzuwerten
   $.get(
     "https://www.nafra.at/adad_st2025/project/" + tweetID + "?type=" + voteType,
     function (data) {
-      // 3.3. Return and display the new amount of votes
+      // 3.3. Geben Sie die neue Anzahl der Bewertungen zurück und zeigen Sie sie an
     }
   );
 
-  /* VOTE TWEETS: END ----------------------------------------- */
+  /* TWEETS BEWERTEN: ENDE ----------------------------------------- */
 
-  /* 4. CREATE TWEETS: START ------------------------------------
-      - Purpose: Create a note
-  - Task: Assignment #22 - Minimal requirements: Task #5
+  /* 4. TWEETS ERSTELLEN: START ------------------------------------
+      - Zweck: Einen Beitrag erstellen
+  - Aufgabe: Aufgabe #22 - Mindestanforderungen: Aufgabe #5
   -------------------------------------------------------------- */
 
-  // 4.1. The "create note"-form was submitted
-  // Hint: Execute the "create a note" logic (below) whenever the "create note"-form was submitted
-  // Hint: Don't forget to prevent the form from submitting (forcing a refresh) - event.preventDefault();
-  // Hint: Check if the form was completed (no fields are empty)
+  // 4.1. Das "Beitrag erstellen"-Formular wurde abgeschickt
+  // Hinweis: Führen Sie die "Beitrag erstellen"-Logik (unten) aus, wenn das "Beitrag erstellen"-Formular abgeschickt wurde
+  // Hinweis: Vergessen Sie nicht, das Formular daran zu hindern, abgeschickt zu werden (was einen Refresh erzwingen würde) - event.preventDefault();
+  // Hinweis: Überprüfen Sie, ob das Formular ausgefüllt wurde (keine Felder sind leer)
 
-  // 4.2. Send a note (completed form) to the server
+  // 4.2. Senden Sie einen Beitrag (ausgefülltes Formular) an den Server
   // (veraltete Logik entfernt)
 
-  /* CREATE TWEETS: END ----------------------------------------- */
+  /* TWEETS ERSTELLEN: ENDE ----------------------------------------- */
 
-  /* 5. CREATE COMMENTS: START ------------------------------------
-      - Purpose: Comment on a note
-  - Task: Assignment #22 - Challenge requirements: Task #2
+  /* 5. KOMMENTARE ERSTELLEN: START ------------------------------------
+      - Zweck: Einen Beitrag kommentieren
+  - Aufgabe: Aufgabe #22 - Challenge-Anforderungen: Aufgabe #2
   ----------------------------------------------------------------- */
 
-  // 5.1. The "create comment"-form was submitted
-  // Hint: Execute the "create a comment" logic (below) whenever the "create comment"-form was submitted
-  // Hint: Don't forget to prevent the form from submitting (forcing a refresh) - event.preventDefault();
-  // Hint: Check if the form was completed (no fields are empty)
+  // 5.1. Das "Kommentar erstellen"-Formular wurde abgeschickt
+  // Hinweis: Führen Sie die "Kommentar erstellen"-Logik (unten) aus, wenn das "Kommentar erstellen"-Formular abgeschickt wurde
+  // Hinweis: Vergessen Sie nicht, das Formular daran zu hindern, abgeschickt zu werden (was einen Refresh erzwingen würde) - event.preventDefault();
+  // Hinweis: Überprüfen Sie, ob das Formular ausgefüllt wurde (keine Felder sind leer)
 
-  // 5.2. Send a comment (completed form) to the server
-  // Hint: You need to replace the variable "tweetID" with the ID of the note that should be commented
-  // var tweetID = pressedelement.target.dataset.tweetID; // Example on how to get an ID (depending on your code)
-  var tweetID = 1; // Example on how to get an ID (depending on your code)
-  // Hint: You need to replace the contents of the variable "formData" with the data of the form
-  var formData = $(".create-comment-form").serialize(); // Example on how to get the form data using jQuery (depending on your code)
+  // 5.2. Senden Sie einen Kommentar (ausgefülltes Formular) an den Server
+  // Hinweis: Sie müssen die Variable "tweetID" durch die ID des Beitrags ersetzen, der kommentiert werden soll
+  // var tweetID = pressedelement.target.dataset.tweetID; // Beispiel, wie man eine ID erhält (abhängig von Ihrem Code)
+  var tweetID = 1; // Beispiel, wie man eine ID erhält (abhängig von Ihrem Code)
+  // Hinweis: Sie müssen den Inhalt der Variable "formData" durch die Daten des Formulars ersetzen
+  var formData = $(".create-comment-form").serialize(); // Beispiel, wie man die Formulardaten mit jQuery erhält (abhängig von Ihrem Code)
   $.post(
     "https://www.nafra.at/adad_st2025/project/" + tweetID,
     formData,
     function (response) {
-      // 5.3. Return and display the new comment
+      // 5.3. Geben Sie den neuen Kommentar zurück und zeigen Sie ihn an
     }
   );
 
-  /* CREATE COMMENTS: END ----------------------------------------- */
+  /* KOMMENTARE ERSTELLEN: ENDE ----------------------------------------- */
 
-  /* 6. YOUR OWN IDEAS: START ------------------------------------
-      - Purpose: Your own purpose
-  - Task: Assignment #22 - Challenge requirements: Task #4
+  /* 6. EIGENE IDEEN: START ------------------------------------
+      - Zweck: Eigene Ideen umsetzen
+  - Aufgabe: Aufgabe #22 - Challenge-Anforderungen: Aufgabe #4
   ---------------------------------------------------------------- */
 
-  // Hint: Be creative :-)
+  // Hinweis: Seien Sie kreativ :-)
 
-  /* YOUR OWN IDEAS: END ----------------------------------------- */
+  /* EIGENE IDEEN: ENDE ----------------------------------------- */
 
   // 7. Sortier-Dropdown
   $('#sort-dropdown').on('change', function() {
@@ -115,7 +115,7 @@ $(function () {
     loadTweets();
   });
 
-  // 8. Tweet erstellen
+  // 8. Beitrag erstellen
   $('#create-note-form').on('submit', function(e) {
     e.preventDefault();
     $('#create-note-form button[type="submit"]').blur();
@@ -211,29 +211,29 @@ $(function () {
   if (typeof moment !== 'undefined') moment.locale('de');
 });
 
-// ORc Translator functionality
+// Orc Translator Funktionalität
 $('#posts-container').on('click', '.btn-translate-ork', function() {
   const button = $(this);
   const tweetCard = button.closest('.tweet-card');
   const orcishDiv = tweetCard.find('.orcish');
   const originalText = button.data('text');
   
-  // Toggle visibility of orcish translation
+  // Sichtbarkeit der orkischen Übersetzung umschalten
   if (orcishDiv.hasClass('d-none')) {
-    // Show translation - you'll need to implement the actual translation logic
-    const orcishTranslation = translateToOrcish(originalText); // You need to implement this function
+    // Übersetzung anzeigen - Sie müssen die eigentliche Übersetzungslogik implementieren
+    const orcishTranslation = translateToOrcish(originalText); // Sie müssen diese Funktion implementieren
     orcishDiv.text(orcishTranslation).removeClass('d-none');
     button.text('Original anzeigen');
   } else {
-    // Hide translation
+    // Übersetzung ausblenden
     orcishDiv.addClass('d-none');
     button.text('Auf Orkisch übersetzen');
   }
 });
 
-// Simple orcish translator function (you can make this more sophisticated)
+// Einfache orkische Übersetzungsfunktion (Sie können dies weiter verbessern)
 function translateToOrcish(text) {
-  // This is a basic implementation - you can enhance it
+  // Dies ist eine grundlegende Implementierung - Sie können sie erweitern
   return text.toLowerCase()
     .replace(/hallo/gi, 'lok tar')
     .replace(/freund/gi, 'uruk')
