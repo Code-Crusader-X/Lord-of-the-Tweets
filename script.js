@@ -163,6 +163,8 @@ $(function () {
           <span class="tweet-time">${timeAgo}</span>
         </div>
         <div class="tweet-text">${escapeHtml(tweet.text)}</div>
+        <button class="btn btn-secondary btn-translate-ork mt-1" data-text="${escapeHtml(tweet.text)}">Auf Orkisch übersetzen</button>
+        <div class="tweet-text orcish mt-1 d-none"></div>
         <div class="tweet-reactions my-2">
           <button class="btn-praise" data-vote="upvote">
             Aufheizen 🔥 (${tweet.reactions})
@@ -208,3 +210,125 @@ $(function () {
   // 15. Moment.js auf Deutsch
   if (typeof moment !== 'undefined') moment.locale('de');
 });
+
+// ORc Translator functionality
+$('#posts-container').on('click', '.btn-translate-ork', function() {
+  const button = $(this);
+  const tweetCard = button.closest('.tweet-card');
+  const orcishDiv = tweetCard.find('.orcish');
+  const originalText = button.data('text');
+  
+  // Toggle visibility of orcish translation
+  if (orcishDiv.hasClass('d-none')) {
+    // Show translation - you'll need to implement the actual translation logic
+    const orcishTranslation = translateToOrcish(originalText); // You need to implement this function
+    orcishDiv.text(orcishTranslation).removeClass('d-none');
+    button.text('Original anzeigen');
+  } else {
+    // Hide translation
+    orcishDiv.addClass('d-none');
+    button.text('Auf Orkisch übersetzen');
+  }
+});
+
+/**
+ * ORKISCH-ÜBERSETZUNGSFUNKTION
+ * 
+ * Konvertiert deutschen Text in eine Fantasy-"orkische" Sprache
+ * Inspiriert von J.R.R. Tolkiens Ork-Sprache aus "Der Herr der Ringe"
+ * 
+ * @param {string} text - Deutscher Text zum Übersetzen
+ * @returns {string} "Orkisch" übersetzter Text mit Zusatz-Grummel
+ * 
+ * @algorithm Einfache String-Ersetzung mit RegEx
+ * @expandable Neue Übersetzungsregeln können leicht hinzugefügt werden
+ * @caseSensitive Nutzt 'gi' Flag für case-insensitive Matching
+ * @humor Fügt "*grummelt auf orkisch*" für atmosphärischen Effekt hinzu
+ * 
+ * ÜBERSETZUNGSREGELN:
+ * - Begrüßungen: hallo → lok tar
+ * - Personen: freund → uruk  
+ * - Bewertungen: gut → goth, schlecht → ghash
+ * - Antworten: ja → aye, nein → nul
+ * - Artikel: der/die/das → agh
+ * - Verbindungen: und → ok
+ * - Pronomen: du → uuk, ich → mog
+ * - Easter Egg: nafra → da boss (Referenz zum API-Provider)
+ */
+function translateToOrcish(text) {
+  return text.toLowerCase()
+    // Grundlegende Grüße und Höflichkeiten
+    .replace(/hallo/gi, 'lok tar')      // Ork-Gruß
+    .replace(/tschüss/gi, 'zug zug')    // Ork-Abschied
+    .replace(/danke/gi, 'me not that kind of orc')
+    
+    // Personen und Beziehungen
+    .replace(/freund/gi, 'uruk')        // Ork-Freund
+    .replace(/feind/gi, 'skai')         // Ork-Feind
+    .replace(/mensch/gi, 'umie')        // Ork-Begriff für Menschen
+    
+    // Bewertungen und Emotionen
+    .replace(/gut/gi, 'goth')           // Positiv
+    .replace(/schlecht/gi, 'ghash')     // Negativ
+    .replace(/schön/gi, 'purty')        // Schönheit (Ork-Style)
+    .replace(/hässlich/gi, 'ugsome')    // Hässlichkeit
+    
+    // Grundlegende Kommunikation
+    .replace(/ja/gi, 'aye')             // Zustimmung
+    .replace(/nein/gi, 'nul')           // Ablehnung
+    .replace(/vielleicht/gi, 'mebbe')   // Unsicherheit
+    
+    // Deutsche Artikel (schwierig für Orks!)
+    .replace(/der|die|das/gi, 'agh')    // Vereinfachter Artikel
+    .replace(/ein|eine/gi, 'sum')       // Unbestimmter Artikel
+    
+    // Verbindungswörter
+    .replace(/und/gi, 'ok')             // Einfache Verbindung
+    .replace(/oder/gi, 'or mebbe')      // Alternative
+    .replace(/aber/gi, 'but')           // Einwand
+    
+    // Persönliche Pronomen  
+    .replace(/ich/gi, 'me')             // Erste Person
+    .replace(/du/gi, 'you')             // Zweite Person
+    .replace(/wir/gi, 'us')             // Erste Person Plural
+    .replace(/ihr/gi, 'yous')           // Zweite Person Plural
+    
+    // Zahlen (Orks können nicht gut zählen)
+    .replace(/eins/gi, 'one')
+    .replace(/zwei/gi, 'two')  
+    .replace(/drei/gi, 'few')           // Alles über 2 ist "few"
+    .replace(/vier|fünf|sechs|sieben|acht|neun|zehn/gi, 'lots')
+    
+    // Zeitangaben
+    .replace(/heute/gi, 'dis day')
+    .replace(/gestern/gi, 'yesterday')
+    .replace(/morgen/gi, 'tomorrow')
+    .replace(/jetzt/gi, 'now')
+    
+    // Aktionen und Verben
+    .replace(/gehen/gi, 'go')
+    .replace(/kommen/gi, 'come')
+    .replace(/kämpfen/gi, 'fight')
+    .replace(/essen/gi, 'eat')
+    .replace(/trinken/gi, 'drink')
+    
+    // Tech/Modern (Orks verstehen Technologie nicht)
+    .replace(/computer/gi, 'magic box')
+    .replace(/internet/gi, 'big magic')
+    .replace(/handy|smartphone/gi, 'tiny magic')
+    
+    // LOTR/Fantasy Begriffe
+    .replace(/ring/gi, 'shiny')         // Der Ring ist "shiny"
+    .replace(/gandalf/gi, 'pointy hat')
+    .replace(/frodo/gi, 'tiny man')
+    .replace(/mordor/gi, 'home')        // Mordor ist Ork-Heimat
+    
+    // Easter Eggs und Referenzen
+    .replace(/nafra/gi, 'da boss')      // API-Provider Referenz
+    .replace(/tweet/gi, 'growl')        // Tweets sind Ork-Geknurre
+    .replace(/like/gi, 'gud')           // Likes sind "gud"
+    .replace(/kommentar/gi, 'words')    // Kommentare sind "words"
+    
+    // Atmosphärischer Zusatz
+    + ' *grummelt auf orkisch*';        // Ork-Atmosphäre
+};
