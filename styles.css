@@ -7,12 +7,12 @@
   --dark3: #23201a;
   --shadow: #0008;
   --shadow-strong: #000a;
-  --font-main: 'Ringbearer', serif;
+  --font-main: "Ringbearer", serif;
 }
 
 /* Grundlayout */
 body {
-  background: url('background.png') no-repeat center center fixed;
+  background: url("background.png") no-repeat center center fixed;
   background-size: cover;
   color: var(--beige);
   font-family: var(--font-main);
@@ -78,18 +78,23 @@ body {
 }
 
 /* Buttons */
-.btn-primary, .btn-praise, .btn-curse {
+.btn-primary,
+.btn-praise,
+.btn-curse {
   background: var(--gold);
   color: var(--dark);
   font-family: var(--font-main);
   border: none;
   box-shadow: 0 2px 8px var(--shadow);
 }
-.btn-primary:hover, .btn-praise:hover, .btn-curse:hover {
+.btn-primary:hover,
+.btn-praise:hover,
+.btn-curse:hover {
   background: var(--gold-dark);
   color: #fffbe6;
 }
-.btn-praise, .btn-curse {
+.btn-praise,
+.btn-curse {
   font-size: 1em;
   margin-right: 0.5em;
   border-radius: 6px;
@@ -102,6 +107,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem; /* Abstand zwischen den Tweets */
   margin-top: 2rem;
+  align-items: start;
 }
 .tweet-card {
   background: var(--dark2);
@@ -116,25 +122,31 @@ body {
   min-width: 0;
   word-break: break-word;
 }
-.tweet-user, .comment-user {
+.tweet-user,
+.comment-user {
   font-weight: bold;
   color: var(--gold);
   font-family: var(--font-main);
 }
-.tweet-user { 
-  font-size: 1.3rem; 
+.tweet-user {
+  font-size: 1.3rem;
 }
-.tweet-time, .comment-time { 
-  color: var(--gold-dark); font-size: 1em; 
+.tweet-time,
+.comment-time {
+  color: var(--gold-dark);
+  font-size: 1em;
 }
-.comment-time { 
-  font-size: 0.9em; 
+.comment-time {
+  font-size: 0.9em;
 }
-.tweet-text { 
-  font-size: 1.2em; margin: 0.5em 0 0.7em 0; 
+.tweet-text {
+  font-size: 1.2em;
+  margin: 0.5em 0 0.7em 0;
 }
-.tweet-reactions { 
-  font-size: 1em; color: var(--gold); margin-bottom: 0.5em; 
+.tweet-reactions {
+  font-size: 1em;
+  color: var(--gold);
+  margin-bottom: 0.5em;
 }
 
 /* Kommentare */
@@ -150,12 +162,17 @@ body {
   padding: 0.3em 0;
   font-size: 1em;
 }
-.comment:last-child { 
-  border-bottom: none; 
+.comment:last-child {
+  border-bottom: none;
 }
 
 /* Formulare */
-input, textarea, button, select, .create-comment-form input, .create-comment-form textarea {
+input,
+textarea,
+button,
+select,
+.create-comment-form input,
+.create-comment-form textarea {
   font-size: 1em;
   margin-bottom: 0.3em;
   font-family: var(--font-main) !important;
@@ -167,14 +184,14 @@ input, textarea, button, select, .create-comment-form input, .create-comment-for
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .container { 
-    padding: 1rem 0.5rem; 
+  .container {
+    padding: 1rem 0.5rem;
   }
-  .lotr-title { 
-    font-size: 2.2rem; 
+  .lotr-title {
+    font-size: 2.2rem;
   }
-  .tweet-card { 
-    padding: 0.7rem; 
+  .tweet-card {
+    padding: 0.7rem;
   }
   .d-flex.justify-content-between.align-items-center.mb-3 {
     flex-direction: column !important;
@@ -186,11 +203,12 @@ input, textarea, button, select, .create-comment-form input, .create-comment-for
     margin-left: auto;
     margin-top: 0.5rem;
   }
-  .sort-dots { 
-    right: 4px; font-size: 1em; 
+  .sort-dots {
+    right: 4px;
+    font-size: 1em;
   }
-  #sort-dropdown { 
-    padding-right: 1.5em !important; 
+  #sort-dropdown {
+    padding-right: 1.5em !important;
   }
 }
 
