@@ -210,3 +210,42 @@ $(function () {
   // 15. Moment.js auf Deutsch
   if (typeof moment !== 'undefined') moment.locale('de');
 });
+
+// ORc Translator functionality
+$('#posts-container').on('click', '.btn-translate-ork', function() {
+  const button = $(this);
+  const tweetCard = button.closest('.tweet-card');
+  const orcishDiv = tweetCard.find('.orcish');
+  const originalText = button.data('text');
+  
+  // Toggle visibility of orcish translation
+  if (orcishDiv.hasClass('d-none')) {
+    // Show translation - you'll need to implement the actual translation logic
+    const orcishTranslation = translateToOrcish(originalText); // You need to implement this function
+    orcishDiv.text(orcishTranslation).removeClass('d-none');
+    button.text('Original anzeigen');
+  } else {
+    // Hide translation
+    orcishDiv.addClass('d-none');
+    button.text('Auf Orkisch übersetzen');
+  }
+});
+
+// Simple orcish translator function (you can make this more sophisticated)
+function translateToOrcish(text) {
+  // This is a basic implementation - you can enhance it
+  return text.toLowerCase()
+    .replace(/hallo/gi, 'lok tar')
+    .replace(/freund/gi, 'uruk')
+    .replace(/gut/gi, 'goth')
+    .replace(/schlecht/gi, 'ghash')
+    .replace(/ja/gi, 'aye')
+    .replace(/nein/gi, 'nul')
+    .replace(/der|die|das/gi, 'agh')
+    .replace(/und/gi, 'ok')
+    .replace(/du/gi, 'uuk')
+    .replace(/ich/gi, 'mog')
+    .replace(/nafra/gi, 'der fuehrer')
+    // Weitere Übersetzungen können hinzugefügt werden
+    + ' *grummelt auf orkisch*';
+};
